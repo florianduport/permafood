@@ -1,0 +1,17 @@
+{
+	common_name: "Plant de tomate",
+	garden_layer: "middle",
+	maturation_infos: {
+		seeding_months: [3, 4, 5, 6],
+		planting_months: [5, 6, 7], 
+		growth_days : 40 
+	},
+	food: {
+		average_total_grams: 4000,
+		nutrional_values_per_100g: {
+			protein: 0,1,
+			vitamin_a: 1,
+			glucid: 3
+		} 
+	}
+}
