@@ -4,7 +4,7 @@ import { Navbar as NavbarM, NavItem, Icon } from 'react-materialize';
 function Navbar(props) {
   return <NavbarM
   alignLinks="right"
-  brand={<a className="brand-logo white-text" href="/" style={{ marginLeft: '15px'}}><i class="material-icons">local_florist</i>Permafood</a>}
+  brand={<a className="brand-logo white-text" href="/" style={{ marginLeft: '15px'}}><i className="material-icons">local_florist</i>Permafood</a>}
   id="mobile-nav" className="teal"
   menuIcon={<Icon>menu</Icon>}
   options={{
