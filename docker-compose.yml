@@ -20,10 +20,40 @@ services:
       - "27017:27017"
     volumes:
       - "./db/data:/data/db"
+    logging:
+      driver: none
     networks:
         tars_net:
           ipv4_address: 172.16.0.12
           ipv6_address: 2001:3984:3979::10
+  gateway:
+    stdin_open: true
+    tty: true
+    build: ./services/gateway
+    volumes:
+          - "./services/gateway/:/data/app/"
+    depends_on:
+      - "db"
+    ports:
+      - "3000:3000"
+    networks:
+        tars_net:
+          ipv4_address: 172.16.0.13
+          ipv6_address: 2001:3984:4009::10
+  user:
+    stdin_open: true
+    tty: true
+    build: ./services/user
+    volumes:
+          - "./services/user/:/data/app/"
+    depends_on:
+      - "db"
+    ports:
+      - "3001:3001"
+    networks:
+        tars_net:
+          ipv4_address: 172.16.0.14
+          ipv6_address: 2001:3984:3999::10
 
 networks:
   tars_net:
