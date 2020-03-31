@@ -9,7 +9,7 @@ import Dashboard from './components/pages/Dashboard';
 
 class App extends React.Component {
   state = {
-    texts : [ {id: 1, info : "toto"}, {id: 2, info: "titi"} ]
+    example : [ ]
   }
 
   render() {

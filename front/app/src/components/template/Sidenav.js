@@ -1,5 +1,4 @@
 import React from 'react';
-import 'materialize-css';
 import { SideNav as SideNavM, SideNavItem, Icon, Button, Row, Collection, CollectionItem } from 'react-materialize';
 
 function Sidenav(props) {

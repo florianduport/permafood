@@ -1,5 +1,4 @@
 import React from 'react';
-import 'materialize-css';
 import { Navbar as NavbarM, NavItem, Icon } from 'react-materialize';
 
 function Navbar(props) {

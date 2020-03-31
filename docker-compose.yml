@@ -7,8 +7,9 @@ services:
     ports:
       - "80:80"
     volumes:
-      - "./front/app/:/app/"
-      - '/app/node_modules'
+      - "./front/app/:/data/app/"
+      - "./front/scripts:/data/scripts"
+    command: bash -c "/data/scripts/start.sh"
     networks:
         tars_net:
           ipv4_address: 172.16.0.10

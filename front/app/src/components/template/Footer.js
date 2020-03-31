@@ -1,6 +1,5 @@
 import React from 'react';
-import 'materialize-css';
-import { Footer as FooterM, NavItem, Icon } from 'react-materialize';
+import { Footer as FooterM } from 'react-materialize';
 
 function Footer(props) {
   return <FooterM
