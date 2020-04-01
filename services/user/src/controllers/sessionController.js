@@ -4,7 +4,10 @@ var Session = require('../models/sessionModel');
 
 class SessionController{
 
-    verifyToken(req, res, next){
+    verifyToken(req, res, callback){
+      if(req.url == "/authenticate"){
+          return callback();
+      }
       // check header or url parameters or post parameters for token
       var token = req.body.token || req.query.token || req.headers['x-access-token'];
       var deviceId = req.body.deviceId || req.query.deviceId || req.headers['x-access-device-id'];
@@ -41,11 +44,10 @@ class SessionController{
                       return res.status(200).json({ success: false, message: err.message });
                   }
 
-                  console.log(decoded);
                   if (callback) {
                       // if everything is good, save to request for use in other routes
                       req.decoded = decoded;
-                      callback();
+                      return callback();
                   } else {
                       return res.status(200).send({
                           success: true,

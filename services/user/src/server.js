@@ -17,10 +17,10 @@ class Server extends ServiceServerBase{
     this.app.get('/setup', this.controller.setup);
 
     //middleware
-    /*var sessionController = this.sessionController;
+    var sessionController = this.sessionController;
     this.apiRoutes.use(function(req, res, next) {
         sessionController.verifyToken(req, res, next);
-    });*/
+    });
 
     //api routes under /api/
     this.apiRoutes.post('/create', this.controller.create);

@@ -12,14 +12,15 @@ class RedirectBase{
     app.use(this.domain, this.apiRoutes);
   }
   get(req, res){
-    axios.get(this.serviceUrl+'api'+req.url)
+    axios.get(this.serviceUrl+'api'+req.url, req)
       .then(function (response) {
         // handle success
         res.json(response.data);
       })
       .catch(function (error) {
         // handle error
-        res.json(error);
+        //HOW TO CATCH AND DISPLAY FUCKING ERRORS ???
+        res.json({});
       })
   }
   post(req, res){

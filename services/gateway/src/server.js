@@ -6,9 +6,6 @@ class Server extends ServerBase {
     super();
     this.loadRoutes();
   }
-  start(port){
-    this.app.listen(port);
-  }
   loadRoutes(){
     new UserRedirect().loadRoutes(this.app);
   }

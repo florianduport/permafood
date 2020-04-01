@@ -19,5 +19,8 @@ class ServerBase{
   loadRoutes(){
     this.app.use('/api', this.apiRoutes);
   }
+  start(port){
+    this.app.listen(port);
+  }
 }
 module.exports = ServerBase;
