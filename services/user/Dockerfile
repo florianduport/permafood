@@ -11,4 +11,4 @@ ENV NODE_PATH /install/node_modules/
 COPY ./package.json /install/package.json
 RUN cd /install; npm install
 RUN ln -s /install/node_modules /data/app
-CMD ["nodemon", "/data/app/server.js"]
+CMD ["nodemon", "/data/src/server.js"]

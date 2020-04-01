@@ -1,6 +1,6 @@
 {
     "name": "user",
-    "main": "server.js",
+    "main": "./src/server.js",
     "dependencies": {
         "body-parser": "^1.18.2",
         "express": "^4.16.2",
