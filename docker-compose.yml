@@ -47,6 +47,8 @@ services:
     build: ./services/gateway
     volumes:
           - "./services/gateway/:/data/app/"
+          - "./services/config/:/data/app/src/config"
+          - "./services/base/:/data/app/src/base"
     depends_on:
       - "user"
     ports:

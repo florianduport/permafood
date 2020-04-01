@@ -4,7 +4,7 @@ var jwt = require('jsonwebtoken');
 var Session = require('../models/sessionModel');
 var User = require('../models/userModel');
 
-class userController{
+class UserController{
   constructor(){
 
   }
@@ -113,4 +113,4 @@ class userController{
   }
 
 }
-module.exports = userController;
+module.exports = UserController;
