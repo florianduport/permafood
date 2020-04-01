@@ -12,6 +12,18 @@ function Dashboard(props) {
 
 
         <h1>Simulateur</h1>
+
+        <h5>Infos sur la simulation : </h5>
+        <ul>
+          <li>Date de la simulation : 10/01/2020 à 09h00</li>
+          <li>Taille de la famille : 5 personnes</li>
+          <li>Taille du potager : 10 000m2</li>
+        </ul>
+
+        <Button className="amber">
+          Regénérer la simulation
+        </Button>
+
         <h5>Parcours la timeline mois par mois pour simuler ton potager</h5>
         <Range
           max="12"

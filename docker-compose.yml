@@ -1,19 +1,5 @@
 version: '3.7'
 services:
-  front:
-    stdin_open: true
-    tty: true
-    build: ./front/
-    ports:
-      - "80:80"
-    volumes:
-      - "./front/app/:/data/app/"
-      - "./front/scripts:/data/scripts"
-    command: bash -c "/data/scripts/start.sh"
-    networks:
-        tars_net:
-          ipv4_address: 172.16.0.10
-          ipv6_address: 2001:3984:3989::10
   db:
     build: ./db
     ports:
@@ -26,20 +12,18 @@ services:
         tars_net:
           ipv4_address: 172.16.0.12
           ipv6_address: 2001:3984:3979::10
-  gateway:
-    stdin_open: true
-    tty: true
-    build: ./services/gateway
-    volumes:
-          - "./services/gateway/:/data/app/"
-    depends_on:
-      - "db"
+  messaging:
+    build: ./messaging
     ports:
-      - "3000:3000"
+      - "5672:5672"
+    volumes:
+      - "./messaging/data:/data/messaging"
+    logging:
+      driver: none
     networks:
         tars_net:
-          ipv4_address: 172.16.0.13
-          ipv6_address: 2001:3984:4009::10
+          ipv4_address: 172.16.0.15
+          ipv6_address: 2001:3984:4019::10
   user:
     stdin_open: true
     tty: true
@@ -48,12 +32,43 @@ services:
           - "./services/user/:/data/app/"
     depends_on:
       - "db"
+      - "messaging"
     ports:
       - "3001:3001"
     networks:
         tars_net:
           ipv4_address: 172.16.0.14
           ipv6_address: 2001:3984:3999::10
+  gateway:
+    stdin_open: true
+    tty: true
+    build: ./services/gateway
+    volumes:
+          - "./services/gateway/:/data/app/"
+    depends_on:
+      - "user"
+    ports:
+      - "3000:3000"
+    networks:
+        tars_net:
+          ipv4_address: 172.16.0.13
+          ipv6_address: 2001:3984:4009::10
+  front:
+    stdin_open: true
+    tty: true
+    build: ./front/
+    depends_on:
+      - "gateway"
+    ports:
+      - "80:80"
+    volumes:
+      - "./front/app/:/data/app/"
+      - "./front/scripts:/data/scripts"
+    command: bash -c "/data/scripts/start.sh"
+    networks:
+        tars_net:
+          ipv4_address: 172.16.0.10
+          ipv6_address: 2001:3984:3989::10
 
 networks:
   tars_net:
