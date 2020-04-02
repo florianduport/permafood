@@ -43,7 +43,7 @@ services:
           ipv6_address: 2001:3984:3999::10
   gateway:
     stdin_open: true
-    tty: true
+    #tty: true
     build: ./services/gateway
     volumes:
           - "./services/gateway/:/data/app/"
@@ -58,8 +58,8 @@ services:
           ipv4_address: 172.16.0.13
           ipv6_address: 2001:3984:4009::10
   front:
-    #stdin_open: true
-    #tty: true
+    stdin_open: true
+    tty: true
     build: ./front/
     depends_on:
       - "gateway"

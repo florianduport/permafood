@@ -1,7 +1,30 @@
-import React from 'react';
-import { Row, Col, Button, TextInput, Container, CardPanel, Icon, Form } from 'react-materialize';
+import React, { Component } from 'react';
+import { Row, Col, Button, TextInput, CardPanel} from 'react-materialize';
+import { connect } from 'react-redux';
+import { loginAction } from '../../actions/userActions';
 
-function Login(props) {
+class Login extends Component{
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      username : "",
+      password : ""
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event) {
+    const target = event.target;
+    const value = target.name === 'isGoing' ? target.checked : target.value;
+    const name = target.name;
+    this.setState({
+      [name]: value
+    });
+  }
+
+  render(){
   return <div className="Homepage">
     <Row>
       <Col s={12} className="align-center">
@@ -16,22 +39,32 @@ function Login(props) {
               className="grey lighten-4"
               title="Disponible à consommer en Janvier"
             >
-             <form className="container center" style={{display: 'block'}}>
+             <form onSubmit={
+               (e) => {
+               e.preventDefault()
+               this.props.onLogin(this.state)
+               }
+             } id="loginForm" className="container center" style={{display: 'block'}}>
               <Row>
               <TextInput
               noLayout
                 email
-                id="TextInput-4"
+                id="TextInput-Login"
                 label="Email"
+                name="username"
                 validate
+                defaultValue={this.state.username} onChange={this.handleChange}
                 />
               </Row>
               <Row>
               <TextInput
               noLayout
-                id="TextInput-4"
+                id="TextInput-Password"
                 label="Password"
                 password
+                name="password"
+                validate
+                defaultValue={this.state.password} onChange={this.handleChange}
                 />
               </Row>
               <Row>
@@ -40,7 +73,11 @@ function Login(props) {
                 </label>
               </Row>
               <Row>
-                <Button name='btn_login' className='col s12 btn btn-large waves-effect amber'>Login</Button>
+                <Button
+                type="submit"
+                name='btn_login' className='col s12 btn btn-large waves-effect amber'>
+                Se connecter
+                </Button>
               </Row>
 
                   <a href="#!">Creer un compte</a>
@@ -53,7 +90,24 @@ function Login(props) {
 
     <div className="section"></div>
 
-  </div>;
+  </div>
+  }
+
 }
 
-export default Login;
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onLogin: login => {
+      dispatch(loginAction(login));
+    }
+
+  };
+};
+
+/*export default reduxForm({
+  form: 'loginForm', // a unique identifier for this form
+  onSubmit: loginAction // submit function must be passed to onSubmit
+})(Login)
+*/
+export default connect(null, mapDispatchToProps)(Login);

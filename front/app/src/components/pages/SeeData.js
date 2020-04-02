@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, Button, Card, Icon, Range } from 'react-materialize';
+import { Row, Col } from 'react-materialize';
 import Sidenav from '../template/Sidenav';
 
 function SeeData(props) {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, Button, Card, Icon, Range } from 'react-materialize';
+import { Row, Col, Card, Icon, Range } from 'react-materialize';
 import Sidenav from '../template/Sidenav';
 
 function Family(props) {
@@ -18,7 +18,7 @@ function Family(props) {
         >
           <Card
             actions={[
-              <a key="1" href="#">Enregistrer</a>
+              <a key="1" href="/">Enregistrer</a>
             ]}
             className="blue-grey darken-1"
             closeIcon={<Icon>close</Icon>}
