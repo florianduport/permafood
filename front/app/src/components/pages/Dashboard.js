@@ -1,9 +1,11 @@
 import React from 'react';
 import { Row, Col, Button, Icon, Card, Range } from 'react-materialize';
 import Sidenav from '../template/Sidenav';
+import { connect } from 'react-redux';
 
 function Dashboard(props) {
   return <div className="Dashboard">
+    {JSON.stringify(props)}
     <Row>
       <Col s={3}>
         <Sidenav/>
@@ -101,4 +103,14 @@ function Dashboard(props) {
   </div>;
 }
 
-export default Dashboard;
+const mapStateToProps= (state) => {
+  return state
+}
+/*const mapDispatchToProps = (dispatch) => ({
+  handleSubmitAction: value => {
+    return dispatch(loginAction(value));
+  }
+});
+*/
+
+export default connect(mapStateToProps)(Dashboard);

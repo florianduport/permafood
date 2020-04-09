@@ -1,17 +1,16 @@
 import {
   LOGIN_STARTED,
-  LOGIN_SUCCESS,
-  LOGIN_FAILURE
+  LOGIN_SUCCESS
 } from '../actions/types';
 
 const initState = {
   loading: false,
   isConnected : false,
   login: {
-    username:"",
-    password: ""
-  },
-  error: null
+    username:"johndoe@test.com",
+    password: "test123",
+    error: ""
+  }
 };
 
 export default function userReducer( state = initState, action) {
@@ -19,6 +18,7 @@ export default function userReducer( state = initState, action) {
     case LOGIN_STARTED:
       return {
         ...state,
+        isConnected: false,
         loading: true
       };
     case LOGIN_SUCCESS:
@@ -28,12 +28,6 @@ export default function userReducer( state = initState, action) {
         error: null,
         isConnected : true,
         login: action.payload
-      };
-    case LOGIN_FAILURE:
-      return {
-        ...state,
-        loading: false,
-        error: action.payload.error
       };
     default:
       return state;

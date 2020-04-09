@@ -97,7 +97,7 @@ class UserController{
                     // return the information including token as JSON
                     res.json({
                         success: true,
-                        message: 'Enjoy your token!',
+                        username: req.body.username,
                         token: token
                     });
                 }

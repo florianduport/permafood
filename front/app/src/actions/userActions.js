@@ -1,9 +1,10 @@
+import axios from 'axios';
+import { SubmissionError } from 'redux-form'
 import {
   LOGIN_STARTED,
-  LOGIN_SUCCESS,
-  LOGIN_FAILURE
+  LOGIN_SUCCESS
 } from './types';
-import axios from 'axios';
+
 
 function validateEmail(email) {
   return email !== undefined && email.length > 0;
@@ -17,27 +18,39 @@ const validate = (username, password) => {
   return validateEmail(username) && validatePassword(password);
 }
 
-//export const login = ({username, password}) => {
 export const loginAction = (login) => {
 
   return (dispatch, getState) => {
+
     dispatch(loginStarted());
 
     if(validate(login.username, login.password)){
-      axios
+      return axios
        .post(`/users/authenticate`,
       {
          username : login.username,
-         password : login.password
+         password : login.password,
+         deviceId : 1
        })
        .then(res => {
-         dispatch(loginSuccess(res.data));
+         console.log(res.data)
+         if(!res.data.success){
+           return Promise.reject(new SubmissionError({
+             _error: "Nom d'utilisateur ou mot de passe incorrect"
+          }));
+         } else {
+           dispatch(loginSuccess(res.data));
+         }
        })
        .catch(err => {
-         dispatch(loginFailure(err.message));
+         return Promise.reject(new SubmissionError({
+           _error: "Nom d'utilisateur ou mot de passe incorrect"
+        }));
        });
     } else {
-      dispatch(loginFailure("YO"));
+      return Promise.reject(new SubmissionError({
+        _error: "Nom d'utilisateur ou mot de passe incorrect"
+      }));
     }
   }
 }
@@ -46,16 +59,9 @@ const loginStarted = () => ({
   type: LOGIN_STARTED
 });
 
-const loginSuccess = todo => ({
+const loginSuccess = successMessage => ({
   type: LOGIN_SUCCESS,
   payload: {
-    ...todo
-  }
-});
-
-const loginFailure = error => ({
-  type: LOGIN_FAILURE,
-  payload: {
-    error
+    ...successMessage
   }
 });
