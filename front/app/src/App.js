@@ -25,9 +25,15 @@ class App extends React.Component {
             <Route exact path="/dashboard">
               {(!this.props.isConnected ? <Redirect to="/login" /> : <Dashboard />)}
             </Route>
-            <Route exact path="/family" component={Family} />
-            <Route exact path="/garden" component={Garden} />
-            <Route exact path="/seedata" component={SeeData} />
+            <Route exact path="/family">
+              {(!this.props.isConnected ? <Redirect to="/login" /> : <Family />)}
+            </Route>
+            <Route exact path="/garden">
+              {(!this.props.isConnected ? <Redirect to="/login" /> : <Garden />)}
+            </Route>
+            <Route exact path="/seedata">
+              {(!this.props.isConnected ? <Redirect to="/login" /> : <SeeData />)}
+            </Route> 
           </div>
         </main>
 

@@ -14,8 +14,7 @@ const rootReducer = combineReducers({
   form: formReducer,
   userReducer : userReducer
 })
-console.log(localStorageManager.loadState())
-const store = createStore(rootReducer, new LocalStorageManager().loadState(), applyMiddleware(thunk));
+const store = createStore(rootReducer, localStorageManager.loadState(), applyMiddleware(thunk));
 store.subscribe(() => {
   localStorageManager.saveState(store.getState());
 });
