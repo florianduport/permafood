@@ -57,6 +57,20 @@ services:
         tars_net:
           ipv4_address: 172.16.0.13
           ipv6_address: 2001:3984:4009::10
+  storybook:
+    build: ./front/
+    logging:
+      driver: none
+    volumes:
+      - "./front/app/:/data/app/"
+      - "./front/scripts:/data/scripts"
+    command: "yarn storybook"
+    ports:
+      - "9009:9009"
+    networks:
+        tars_net:
+          ipv4_address: 172.16.0.16
+          ipv6_address: 2001:3984:5989::10
   front:
     stdin_open: true
     tty: true
