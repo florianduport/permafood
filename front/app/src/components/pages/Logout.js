@@ -6,10 +6,10 @@ import { loginAction } from '../../actions/userActions';
 import LoginForm from '../forms/LoginForm';
 import { Field, reduxForm } from 'redux-form'
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
-
 class Logout extends Component{
   constructor(props) {
     super(props);
+    localStorage.setItem('state', undefined);
     this.setState({isConnected : false});
   }
 
