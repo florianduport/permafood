@@ -4,6 +4,7 @@ import Navbar from './components/template/Navbar';
 import Footer from './components/template/Footer';
 import Homepage from './components/pages/Homepage';
 import Login from './components/pages/Login';
+import Logout from './components/pages/Logout';
 import Dashboard from './components/pages/Dashboard';
 import Family from './components/pages/Family';
 import Garden from './components/pages/Garden';
@@ -20,8 +21,9 @@ class App extends React.Component {
           <div className="App">
             <Route exact path="/" component={Homepage} />
             <Route exact path="/login" component={Login} />
+            <Route exact path="/logout" component={Logout} />
             <Route exact path="/dashboard">
-              {(!this.props.userReducer.isConnected ? <Redirect to="/login" /> : <Dashboard />)}
+              {(!this.props.isConnected ? <Redirect to="/login" /> : <Dashboard />)}
             </Route>
             <Route exact path="/family" component={Family} />
             <Route exact path="/garden" component={Garden} />
@@ -37,7 +39,7 @@ class App extends React.Component {
 
 const mapStateToProps= (state) => {
 
-  return state
+  return state.userReducer
 }
 
 export default connect(mapStateToProps)(App);

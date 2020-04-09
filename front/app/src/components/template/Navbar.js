@@ -1,7 +1,15 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { Navbar as NavbarM, NavItem, Icon } from 'react-materialize';
+import { connect } from 'react-redux';
+class Navbar extends Component{
 
-function Navbar(props) {
+
+  constructor(props) {
+    super(props);
+  }
+
+  render(){
+
   return <NavbarM
   alignLinks="right"
   brand={<a className="brand-logo white-text" href="/" style={{ marginLeft: '15px'}}><i className="material-icons">local_florist</i>Permafood</a>}
@@ -19,10 +27,24 @@ function Navbar(props) {
     preventScrolling: true
   }}
 >
-  <NavItem className="white-text" href="/login">
-    Se connecter
-  </NavItem>
+
+    <NavItem className="white-text" href={!this.props.isConnected ? "/login" : "/logout" }>
+      {!this.props.isConnected ? "Se connecter" : "Se déconnecter" }
+    </NavItem>
+
+
 </NavbarM>;
 }
+}
 
-export default Navbar;
+const mapStateToProps= (state) => {
+  return state.userReducer
+}
+/*const mapDispatchToProps = (dispatch) => ({
+  handleSubmitAction: value => {
+    return dispatch(loginAction(value));
+  }
+});
+*/
+
+export default connect(mapStateToProps)(Navbar);
